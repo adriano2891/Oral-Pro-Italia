@@ -229,7 +229,7 @@ function MainAppLayout() {
         />
 
         {/* Main Content Router with top padding compensating for the fixed header */}
-        <main className="flex-1 pt-18 lg:pt-20">
+        <main className="flex-1 pt-20 sm:pt-22 lg:pt-24">
           {currentPage === 'home' && (
             <>
               <HeroSection

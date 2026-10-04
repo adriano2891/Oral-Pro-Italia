@@ -1,6 +1,66 @@
 import React, { useState } from 'react';
 
-export const ORALPRO_LOGO_URL = 'https://i.ibb.co/fV5RTsz1/chatgpt-4.png';
+export const ORALPRO_LOGO_URL = 'https://i.ibb.co/MDpzrTVH/chatgpt-7.png';
+export const ORALPRO_LOCAL_LOGO_URL = '/images/oralpro-logo.png';
+
+export interface LogoProps {
+  className?: string;
+  size?: 'xs' | 'sm' | 'md' | 'header' | 'lg' | 'xl';
+  showText?: boolean;
+  light?: boolean;
+  showBackground?: boolean;
+}
+
+export const OralProLogo: React.FC<LogoProps> = ({
+  className = '',
+  size = 'header',
+  light = false,
+  showBackground = false,
+}) => {
+  const [imgSrc, setImgSrc] = useState(ORALPRO_LOGO_URL);
+
+  // Height configurations tuned for a much larger, bolder and prominent brand presence
+  const heightClass = {
+    xs: 'h-8 sm:h-9',
+    sm: 'h-10 sm:h-11',
+    md: 'h-12 sm:h-14 lg:h-16',
+    header: 'h-13 sm:h-14 lg:h-16 xl:h-18',
+    lg: 'h-16 sm:h-18 lg:h-22',
+    xl: 'h-22 sm:h-26 lg:h-32',
+  }[size] || 'h-13 sm:h-14 lg:h-16 xl:h-18';
+
+  const logoImage = (
+    <img
+      src={imgSrc}
+      alt="OralPro Marketing Dentário"
+      className={`${heightClass} w-auto object-contain select-none transition-transform duration-200 group-hover:scale-[1.02] shrink-0`}
+      onError={() => {
+        if (imgSrc !== ORALPRO_LOCAL_LOGO_URL) {
+          setImgSrc(ORALPRO_LOCAL_LOGO_URL);
+        }
+      }}
+      loading="eager"
+      decoding="async"
+    />
+  );
+
+  // If used on a dark background (light = true or dark admin/footer), provide a crisp white badge
+  if (light || showBackground) {
+    return (
+      <div
+        className={`inline-flex items-center justify-center bg-white px-2.5 py-1 rounded-xl shadow-xs border border-white/20 select-none shrink-0 ${className}`}
+      >
+        {logoImage}
+      </div>
+    );
+  }
+
+  return (
+    <div className={`inline-flex items-center shrink-0 select-none ${className}`}>
+      {logoImage}
+    </div>
+  );
+};
 
 export interface EmblemProps {
   className?: string;
@@ -12,119 +72,16 @@ export interface EmblemProps {
 export const OralProEmblem: React.FC<EmblemProps> = ({
   className = '',
   size = 'md',
-  showBackground = false,
-  light = false,
-}) => {
-  const [imgError, setImgError] = useState(false);
-
-  const iconDimensions = {
-    xs: 'w-6 h-6',
-    sm: 'w-8 h-8',
-    md: 'w-10 h-10 sm:w-12 sm:h-12',
-    header: 'w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 xl:w-12 xl:h-12',
-    lg: 'w-14 h-14 sm:w-16 sm:h-16',
-    xl: 'w-20 h-20',
-  }[size];
-
-  return (
-    <div
-      className={`${iconDimensions} ${className} shrink-0 select-none flex items-center justify-center`}
-    >
-      {!imgError ? (
-        <img
-          src={ORALPRO_LOGO_URL}
-          alt="OralPro"
-          className="w-full h-full object-contain scale-110 sm:scale-120 pointer-events-none drop-shadow-xs"
-          loading="eager"
-          onError={() => setImgError(true)}
-        />
-      ) : (
-        <svg
-          viewBox="17 7 66 85"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-full h-full"
-        >
-          {/* Official Tooth Silhouette */}
-          <path
-            d="M 25 35 C 22 20, 36 12, 50 20 C 64 12, 78 20, 75 35 C 72 48, 74 65, 66 82 C 60 92, 53 85, 50 68 C 47 85, 40 92, 34 82 C 26 65, 28 48, 25 35 Z"
-            stroke={light ? '#60A5FA' : '#1E40AF'}
-            strokeWidth="4.6"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            fill="none"
-          />
-          {/* ECG Pulse / Heartbeat */}
-          <path
-            d="M 28 48 L 40 48 L 44 38 L 48 62 L 53 30 L 57 55 L 61 48 L 72 48"
-            stroke={light ? '#F87171' : '#EF4444'}
-            strokeWidth="4.2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            fill="none"
-          />
-        </svg>
-      )}
-    </div>
-  );
-};
-
-interface LogoProps {
-  className?: string;
-  size?: 'sm' | 'md' | 'header' | 'lg' | 'xl';
-  showText?: boolean;
-  light?: boolean;
-  showBackground?: boolean;
-}
-
-export const OralProLogo: React.FC<LogoProps> = ({
-  className = '',
-  size = 'md',
-  showText = true,
   light = false,
   showBackground = false,
 }) => {
-  const textStyles = {
-    sm: 'text-sm font-black tracking-wider',
-    md: 'text-lg font-black tracking-wider',
-    header: 'text-base sm:text-lg lg:text-xl xl:text-2xl font-black tracking-tight leading-none',
-    lg: 'text-2xl font-black tracking-wider',
-    xl: 'text-3xl font-black tracking-wider',
-  }[size];
-
-  const subStyles = {
-    sm: 'text-[8.5px]',
-    md: 'text-[9px]',
-    header: 'text-[7.5px] sm:text-[8px] lg:text-[9px] xl:text-[10px] uppercase tracking-wider font-semibold mt-0.5',
-    lg: 'text-[11px]',
-    xl: 'text-[12px]',
-  }[size];
-
   return (
-    <div className={`flex items-center gap-2 sm:gap-3.5 select-none ${className}`}>
-      {/* Official OralPro Mark: Tooth + Heartbeat Pulse (no background circle) */}
-      <OralProEmblem
-        size={size}
-        light={light}
-        showBackground={showBackground}
-        className="transition-transform duration-200 group-hover:scale-105"
-      />
-
-      {showText && (
-        <div className="flex flex-col justify-center">
-          <div className="flex items-center tracking-tight leading-none">
-            <span className={`${textStyles} ${light ? 'text-white' : 'text-slate-950'} font-display`}>
-              ORAL
-            </span>
-            <span className={`${textStyles} text-blue-600 font-display ml-1`}>
-              PRO
-            </span>
-          </div>
-          <span className={`${subStyles} uppercase tracking-widest font-semibold mt-0.5 ${light ? 'text-slate-300' : 'text-slate-500'}`}>
-            Marketing Dentário
-          </span>
-        </div>
-      )}
-    </div>
+    <OralProLogo
+      size={size}
+      light={light}
+      showBackground={showBackground}
+      className={className}
+    />
   );
 };
+

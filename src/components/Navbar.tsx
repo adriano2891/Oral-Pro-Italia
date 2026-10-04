@@ -68,7 +68,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-slate-200/90 shadow-xs transition-colors w-full">
-      <div className="w-full max-w-[1720px] mx-auto px-2.5 sm:px-4 lg:px-4 xl:px-6 h-18 lg:h-20 flex items-center justify-between gap-1.5 sm:gap-2 lg:gap-2.5 xl:gap-4">
+      <div className="w-full max-w-[1720px] mx-auto px-2.5 sm:px-4 lg:px-4 xl:px-6 h-20 sm:h-22 lg:h-24 flex items-center justify-between gap-1.5 sm:gap-2 lg:gap-2.5 xl:gap-4">
         {/* ========================================================= */}
         {/* AREA 1: LOGÓTIPO À ESQUERDA */}
         {/* ========================================================= */}
@@ -87,7 +87,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         {/* AREA 2: NAVEGAÇÃO PRINCIPAL AO CENTRO (DESKTOP) */}
         {/* ========================================================= */}
         <nav
-          className="hidden lg:flex items-center justify-center gap-0.5 xl:gap-2 2xl:gap-3.5 font-medium"
+          className="hidden lg:flex items-center justify-center gap-1 xl:gap-2.5 2xl:gap-3.5 font-medium"
           aria-label="Navegação Principal"
         >
           {navItems.map((item) => {
@@ -97,17 +97,17 @@ export const Navbar: React.FC<NavbarProps> = ({
                 key={item.page}
                 type="button"
                 onClick={() => handleNavClick(item.page)}
-                className={`relative py-1.5 px-1.5 lg:px-2 xl:px-2.5 transition-colors cursor-pointer text-xs lg:text-[13px] xl:text-sm whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 rounded-lg ${
+                className={`relative py-2 px-2 xl:px-3 2xl:px-3.5 transition-colors cursor-pointer text-[15px] xl:text-[16.5px] 2xl:text-[18px] tracking-tight whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 rounded-xl ${
                   isActive
                     ? 'text-blue-600 font-bold'
-                    : 'text-slate-600 hover:text-blue-600 font-medium'
+                    : 'text-slate-700 hover:text-blue-600 font-semibold'
                 }`}
               >
                 <span>{item.label}</span>
                 {isActive && (
                   <span
                     aria-hidden="true"
-                    className="absolute -bottom-0.5 left-0 right-0 h-0.5 bg-blue-600 rounded-full"
+                    className="absolute -bottom-1.5 left-2 right-2 h-1 bg-blue-600 rounded-full shadow-xs"
                   />
                 )}
               </button>
@@ -182,7 +182,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       {/* MOBILE MENU CARD (CONFORME IMAGEM 2 DE REFERÊNCIA) */}
       {/* ========================================================= */}
       {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-x-0 top-18 sm:top-20 bottom-0 z-50 bg-slate-950/50 backdrop-blur-xs p-3.5 sm:p-5 overflow-y-auto animate-in fade-in duration-200">
+        <div className="lg:hidden fixed inset-x-0 top-20 sm:top-22 bottom-0 z-50 bg-slate-950/50 backdrop-blur-xs p-3.5 sm:p-5 overflow-y-auto animate-in fade-in duration-200">
           <div
             id="mobile-navigation-menu"
             ref={mobileMenuRef}
@@ -200,16 +200,16 @@ export const Navbar: React.FC<NavbarProps> = ({
                     key={item.page}
                     type="button"
                     onClick={() => handleNavClick(item.page)}
-                    className={`w-full py-3.5 px-3.5 rounded-xl transition-all cursor-pointer flex items-center justify-between text-left text-sm font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 ${
+                    className={`w-full py-3.5 px-4 rounded-xl transition-all cursor-pointer flex items-center justify-between text-left text-base sm:text-[17px] font-bold tracking-tight focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 ${
                       isActive
                         ? 'text-blue-600 bg-blue-50/80 font-bold'
-                        : 'text-slate-700 hover:text-blue-600 hover:bg-slate-50'
+                        : 'text-slate-800 hover:text-blue-600 hover:bg-slate-50'
                     }`}
                   >
                     <span>{item.label}</span>
                     <ChevronRight
-                      className={`w-4 h-4 transition-transform ${
-                        isActive ? 'text-blue-600 translate-x-0.5' : 'text-slate-400'
+                      className={`w-5 h-5 transition-transform ${
+                        isActive ? 'text-blue-600 translate-x-1' : 'text-slate-400'
                       }`}
                     />
                   </button>
