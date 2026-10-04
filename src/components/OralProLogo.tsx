@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-export const ORALPRO_LOGO_URL = 'https://i.ibb.co/MDpzrTVH/chatgpt-7.png';
-export const ORALPRO_LOCAL_LOGO_URL = '/images/oralpro-logo.png';
+export const ORALPRO_LOGO_URL = '/images/oralpro-logo.png';
+export const ORALPRO_REMOTE_LOGO_URL = 'https://i.ibb.co/MDpzrTVH/chatgpt-7.png';
 
 export interface LogoProps {
   className?: string;
@@ -19,24 +19,24 @@ export const OralProLogo: React.FC<LogoProps> = ({
 }) => {
   const [imgSrc, setImgSrc] = useState(ORALPRO_LOGO_URL);
 
-  // Height configurations tuned for a much larger, bolder and prominent brand presence
+  // Height configurations tuned for optimal horizontal balance with pure transparent background
   const heightClass = {
-    xs: 'h-8 sm:h-9',
-    sm: 'h-10 sm:h-11',
-    md: 'h-12 sm:h-14 lg:h-16',
-    header: 'h-13 sm:h-14 lg:h-16 xl:h-18',
-    lg: 'h-16 sm:h-18 lg:h-22',
-    xl: 'h-22 sm:h-26 lg:h-32',
-  }[size] || 'h-13 sm:h-14 lg:h-16 xl:h-18';
+    xs: 'h-6 sm:h-7',
+    sm: 'h-8 sm:h-9',
+    md: 'h-10 sm:h-11 lg:h-12',
+    header: 'h-9 sm:h-10.5 lg:h-12.5 xl:h-14',
+    lg: 'h-13 sm:h-15 lg:h-18',
+    xl: 'h-18 sm:h-22 lg:h-26',
+  }[size] || 'h-9 sm:h-10.5 lg:h-12.5 xl:h-14';
 
   const logoImage = (
     <img
       src={imgSrc}
-      alt="OralPro Marketing Dentário"
-      className={`${heightClass} w-auto object-contain select-none transition-transform duration-200 group-hover:scale-[1.02] shrink-0`}
+      alt="OralPro - Marketing Dentário"
+      className={`${heightClass} w-auto object-contain select-none transition-transform duration-200 group-hover:scale-[1.02] shrink-0 bg-transparent`}
       onError={() => {
-        if (imgSrc !== ORALPRO_LOCAL_LOGO_URL) {
-          setImgSrc(ORALPRO_LOCAL_LOGO_URL);
+        if (imgSrc !== ORALPRO_REMOTE_LOGO_URL) {
+          setImgSrc(ORALPRO_REMOTE_LOGO_URL);
         }
       }}
       loading="eager"
@@ -44,7 +44,7 @@ export const OralProLogo: React.FC<LogoProps> = ({
     />
   );
 
-  // If used on a dark background (light = true or dark admin/footer), provide a crisp white badge
+  // If used on a dark background (light = true), provide a crisp white badge for legibility
   if (light || showBackground) {
     return (
       <div
@@ -55,8 +55,9 @@ export const OralProLogo: React.FC<LogoProps> = ({
     );
   }
 
+  // Pure transparent background (e.g. Navbar)
   return (
-    <div className={`inline-flex items-center shrink-0 select-none ${className}`}>
+    <div className={`inline-flex items-center shrink-0 select-none bg-transparent ${className}`}>
       {logoImage}
     </div>
   );
@@ -84,4 +85,5 @@ export const OralProEmblem: React.FC<EmblemProps> = ({
     />
   );
 };
+
 
